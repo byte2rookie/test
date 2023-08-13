@@ -8,16 +8,21 @@ cv.namedWindow('gray_dzr', cv.WINDOW_NORMAL)
 cv.resizeWindow('gray_dzr', 600, 500)
 cv.imshow('gray_dzr',gray_img)
 cv.waitKey(0)
-cv.destroyWindow('gray_dzr')
-#保存
-for num in range(1,10):
-    filename ='gray_dzr'+str(num)+'.jpg'
-    file_exist=open(filename,mode='r')
-    if not file_exist:
-        cv.imwrite(filename,gray_img)
-        file_exist.close()
-    num += 1
-    break
-else:
-        print(str(filename))
+cv.destroyAllWindows()
+
+
+#保存 我们采用chatgpt更改后的写法
+import os
+for num in range(1, 11):
+    filename = 'gray_dzr' + str(num) + '.jpg'
+
+    if os.path.exists(filename):
+        print(f"File '{filename}' already exists.")
+    else:
+        cv.imwrite(filename, gray_img)
+        print(f"Created file '{filename}'.")
+        break
+    if num >= 9:  # To limit the loop to 1-10
+        break
+
 
