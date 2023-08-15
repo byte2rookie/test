@@ -32,9 +32,10 @@ def GetImagesandLabels(Path):
         print('faceSample:',facesSamples)
     return facesSamples,ids
 
+
 if __name__ == '__main__':
 #2.储存获取的face和label
-    Path='D:/pycharm/Projs/wangyibo'
+    Path='D:\pycharm\Projs\zzy'
     faces,ids=GetImagesandLabels(Path)
 
 #3.加载识别器
