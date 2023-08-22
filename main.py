@@ -1,4 +1,4 @@
-
+import time
 import serial #引入外设
 import 核心_人脸识别门禁
 import 进制转换
@@ -9,15 +9,20 @@ if __name__ == '__main__':
         print('串口已打开')
     else:
         print('串口未打开')
+
     sign=serial.read(1)#记录从单片机收到的信息
     print(sign)
     data=b'\x01'
     if sign == b'\x01':
         serial.write(data)#向外设中写入1的信号试试看
-        print('输入的数据为:',data)
+        print('输入的数据为:',data) 
 while True:
+        status = b'\x10'
+        serial.write(status)
+        time.sleep(1)
+        databack=serial.read(1)
+        print(f"返回的值1为：{databack}")
         sign1=核心_人脸识别门禁.recognization()
-
         if sign1==1:#识别成功
             #order=进制转换.conv_message(1)
             order=b'\x02'
@@ -28,8 +33,18 @@ while True:
             order=b'\x03'
             serial.write(order)
 
-        reset=b'\x09'
-        serial.write(reset)
+        time.sleep(1)
+        databack = serial.read(1)
+        print(f"返回的值2为：{databack}")
+        #写入确认信息
+        confirm = b'\x11'
+        serial.write(confirm)
+        time.sleep(1)
+        databack = serial.read(1)
+        print(f"返回的值3为：{databack}")
+        #reset=b'\x09'
+        #serial.write(reset)
+        time.sleep(10)
         if ord(' ') == True:
             turnoff=b'\x00'
             serial.write(turnoff)
