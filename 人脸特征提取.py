@@ -43,3 +43,5 @@ if __name__ == '__main__':
     recognizer.train(faces,np.array(ids))
 #4.储存一下
     recognizer.write('trainer.yml')
+
+#接下来学习一下怎么拓展
