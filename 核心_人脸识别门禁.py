@@ -46,7 +46,7 @@ def face_detect_cmd(img):
     #划重点，这里的y:y+h,x:x+w实际上是对灰度处理图像画框的位置,predict也是对这一块区域进行的predict
         if confidence > 60:
             warntime += 1
-            if warntime > 50:
+            if warntime > 80:
                 #warning()
                 #在图片中显示一个未知的标记
                 cv2.putText(img,'unknown',(x+10,y-10),cv2.FONT_HERSHEY_SIMPLEX,0.75,(255,0,0),3)
